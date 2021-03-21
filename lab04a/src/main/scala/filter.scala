@@ -20,7 +20,7 @@ object filter {
       offset = s"""{"${topic}":{"0":${offset}}}"""
     }
 
-    val df = spark.read
+    val df_initial = spark.read
       .format("kafka")
       .option("kafka.bootstrap.servers", "spark-master-1:6667")
       .option("subscribe", topic)
@@ -29,7 +29,7 @@ object filter {
       .option("checkpointLocation", "s/tmp/chk/$chkName")
       .load()
 
-    df.select($"value".cast("string").as[String])
+    val df = df_initial.select($"value".cast("string").as[String])
 
     val schema = StructType(Seq(
       StructField("category", StringType, true),
