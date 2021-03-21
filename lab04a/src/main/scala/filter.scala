@@ -41,7 +41,7 @@ object filter {
     ))
     val processedDF = df
       .withColumn("jsonData", from_json($"value", schema)).select("jsonData.*")
-      .withColumn("data", date_format(($"timestamp" / 1000).cast(TimestampType), "yyyyMMdd"))
+      .withColumn("date", date_format(($"timestamp" / 1000).cast(TimestampType), "yyyyMMdd"))
       .withColumn("datepart", $"date")
 
     val ViewDF = processedDF.filter($"event_type" === "view")
