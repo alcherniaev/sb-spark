@@ -15,6 +15,7 @@ object filter {
     val topic = spark.conf.get("spark.filter.topic_name")
     var offset = spark.conf.get("spark.filter.offset")
     val path = spark.conf.get("spark.filter.output_dir_prefix")
+    val topicOffset = if (offset == "earliest") "earliest" else s"""{"$topic":{"0":$offset}}"""
 
 //    if (offset != "earliest") {
 //      offset = s"""{"${topic}":{"0":${offset}}}"""
@@ -25,7 +26,7 @@ object filter {
       .format("kafka")
       .option("kafka.bootstrap.servers", "spark-master-1:6667")
       .option("subscribe", topic)
-      .option("startingOffset", offset)
+      .option("startingOffset", topicOffset)
       .option("endingOffsets", "latest")
       //.option("checkpointLocation", "s/tmp/chk/$chkName")
       .load()
