@@ -1,0 +1,88 @@
+[debug] > Exec(early(addDefaultCommands), None, None)
+[debug] > Exec(addDefaultCommands, None, None)
+[debug] > Exec(early(initialize), None, None)
+[debug] > Exec(initialize, None, None)
+[debug] > Exec(boot, None, None)
+[debug] > Exec(writeSbtVersion, None, None)
+[info] Updated file /Users/cernaevaa/NewProLab/project/build.properties: set sbt.version to 1.4.3
+[debug] > Exec(reload, None, None)
+[debug] > Exec(sbtStashOnFailure, None, None)
+[debug] > Exec(onFailure loadFailed, None, None)
+[debug] > Exec(loadp, None, None)
+[info] welcome to sbt 1.4.3 (AdoptOpenJDK Java 1.8.0_282)
+[debug]       Load.loadUnit: plugins took 98.110564ms
+[debug]       Load.loadUnit: defsScala took 0.262022ms
+[debug] [Loading] Scanning directory /Users/cernaevaa/.sbt/1.0/plugins
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in /Users/cernaevaa/.sbt/1.0/plugins, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(List(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin))), Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin)))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 21.980177 ms
+[debug]           Load.resolveProject(global-plugins) took 142.799826ms
+[debug]         Load.loadTransitive: finalizeProject(Project(id global-plugins, base: /Users/cernaevaa/.sbt/1.0/plugins, plugins: List(<none>))) took 198.700795ms
+[debug] [Loading] Done in /Users/cernaevaa/.sbt/1.0/plugins, returning: (global-plugins)
+[debug]       Load.loadUnit: loadedProjectsRaw took 223.631151ms
+[debug]       Load.loadUnit: cleanEvalClasses took 0.274826ms
+[debug]     Load.loadUnit(file:/Users/cernaevaa/.sbt/1.0/plugins/, ...) took 329.163557ms
+[debug]   Load.apply: load took 5590.513216ms
+[debug]   Load.apply: resolveProjects took 7.193201ms
+[debug]   Load.apply: finalTransforms took 57.350509ms
+[debug]   Load.apply: config.delegates took 6.970661ms
+[debug]   Load.apply: Def.make(settings)... took 424.375274ms
+[debug]   Load.apply: structureIndex took 98.712397ms
+[debug]   Load.apply: mkStreams took 1.420488ms
+[info] loading global plugins from /Users/cernaevaa/.sbt/1.0/plugins
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[debug] Load.defaultLoad until apply took 12773.072282ms
+[debug]           Load.loadUnit: plugins took 12.354656ms
+[debug]           Load.loadUnit: defsScala took 0.003589ms
+[debug] [Loading] Scanning directory /Users/cernaevaa/NewProLab/project
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in /Users/cernaevaa/NewProLab/project, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(List(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin))), Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin)))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 1.733178 ms
+[debug]               Load.resolveProject(newprolab-build) took 1.034939ms
+[debug]             Load.loadTransitive: finalizeProject(Project(id newprolab-build, base: /Users/cernaevaa/NewProLab/project, plugins: List(<none>))) took 3.226521ms
+[debug] [Loading] Done in /Users/cernaevaa/NewProLab/project, returning: (newprolab-build)
+[debug]           Load.loadUnit: loadedProjectsRaw took 4.685852ms
+[debug]           Load.loadUnit: cleanEvalClasses took 0.010213ms
+[debug]         Load.loadUnit(file:/Users/cernaevaa/NewProLab/project/, ...) took 17.600911ms
+[debug]       Load.apply: load took 18.63292ms
+[debug]       Load.apply: resolveProjects took 0.094072ms
+[debug]       Load.apply: finalTransforms took 7.508562ms
+[debug]       Load.apply: config.delegates took 0.55269ms
+[debug]       Load.apply: Def.make(settings)... took 64.248629ms
+[debug]       Load.apply: structureIndex took 22.301064ms
+[debug]       Load.apply: mkStreams took 0.003729ms
+[info] loading project definition from /Users/cernaevaa/NewProLab/project
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[debug]     Load.loadUnit: plugins took 1014.496029ms
+[debug]     Load.loadUnit: defsScala took 0.004579ms
+[debug] [Loading] Scanning directory /Users/cernaevaa/NewProLab
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in /Users/cernaevaa/NewProLab, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(List(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin))), Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin)))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 1.940685 ms
+[debug]         Load.resolveProject(newprolab) took 1.204763ms
+[debug]       Load.loadTransitive: finalizeProject(Project(id newprolab, base: /Users/cernaevaa/NewProLab, plugins: List(<none>))) took 4.925123ms
+[debug] [Loading] Done in /Users/cernaevaa/NewProLab, returning: (newprolab)
+[debug]     Load.loadUnit: loadedProjectsRaw took 6.301132ms
+[debug]     Load.loadUnit: cleanEvalClasses took 0.013114ms
+[debug]   Load.loadUnit(file:/Users/cernaevaa/NewProLab/, ...) took 1021.460013ms
+[debug] Load.apply: load took 1022.736001ms
+[debug] Load.apply: resolveProjects took 0.117467ms
+[debug] Load.apply: finalTransforms took 10.921063ms
+[debug] Load.apply: config.delegates took 0.366243ms
+[debug] Load.apply: Def.make(settings)... took 60.64107ms
+[debug] Load.apply: structureIndex took 28.04833ms
+[debug] Load.apply: mkStreams took 0.00316ms
+[info] set current project to newprolab (in build file:/Users/cernaevaa/NewProLab/)
+[debug] > Exec(sbtPopOnFailure, None, None)
+[debug] > Exec(resumeFromFailure, None, None)
+[debug] > Exec(notifyUsersAboutShell, None, None)
+[debug] > Exec(iflast shell, None, None)
+[debug] > Exec(shell, None, None)
+[info] sbt server started at local:///Users/cernaevaa/.sbt/1.0/server/a1945653bbe7aaefa2d5/sock
+[info] started sbt server
