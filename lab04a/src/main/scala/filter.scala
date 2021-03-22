@@ -18,7 +18,7 @@ object filter {
 //    val topicOffset = if (offset == "earliest") "earliest" else s"""{"$topic":{"0":$offset}}"""
 
 
-    if (offset != "ealiest") {
+    if (offset != "earliest") {
       offset = s"""{"$topic":{"0":$offset}}"""
     }
 
@@ -31,7 +31,7 @@ object filter {
       //.option("endingOffsets", "latest")
       //.option("checkpointLocation", "s/tmp/chk/$chkName")
       .load()
-
+    //println(offset)
     val df = df_initial.select($"value".cast("string").as[String])
 
     val schema = StructType(Seq(
