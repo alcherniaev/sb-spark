@@ -20,13 +20,14 @@ object filter {
       offset = s"""{"${topic}":{"0":${offset}}}"""
     }
 
+    spark.conf.set("spark.sql.session.timeZone", "UTC")
     val df_initial = spark.read
       .format("kafka")
       .option("kafka.bootstrap.servers", "spark-master-1:6667")
       .option("subscribe", topic)
       .option("startingOffset", offset)
       .option("endingOffsets", "latest")
-      .option("checkpointLocation", "s/tmp/chk/$chkName")
+      //.option("checkpointLocation", "s/tmp/chk/$chkName")
       .load()
 
     val df = df_initial.select($"value".cast("string").as[String])
