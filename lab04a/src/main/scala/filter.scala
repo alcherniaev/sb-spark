@@ -13,7 +13,7 @@ object filter {
     import spark.implicits._
 
     val topic = spark.conf.get("spark.filter.topic_name")
-    var offset = spark.conf.get("spark.filter.offset")
+    val offset = spark.conf.get("spark.filter.offset")
     val path = spark.conf.get("spark.filter.output_dir_prefix")
     val topicOffset = if (offset == "earliest") "earliest" else s"""{"$topic":{"0":$offset}}"""
 
