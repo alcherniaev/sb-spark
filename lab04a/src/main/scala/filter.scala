@@ -14,7 +14,7 @@ object filter {
 
     val topic = spark.conf.get("spark.filter.topic_name")
     var offset = spark.conf.get("spark.filter.offset")
-
+    val path = spark.conf.get("spark.filter.output_dir_prefix")
 
     if (offset != "earliest") {
       offset = s"""{"${topic}":{"0":${offset}}}"""
@@ -47,8 +47,8 @@ object filter {
     val ViewDF = processedDF.filter($"event_type" === "view")
     val BuyDF = processedDF.filter($"event_type" === "buy")
 
-    ViewDF.write.format("json").mode("overwrite").partitionBy("date_part").save("/user/alexey.chernyaev2/visits/view/")
-    BuyDF.write.format("json").mode("overwrite").partitionBy("date_part").save("/user/alexey.chernyaev2/visits/buy/")
+    ViewDF.write.format("json").mode("overwrite").partitionBy("date_part").save(path + "/view/")
+    BuyDF.write.format("json").mode("overwrite").partitionBy("date_part").save(path + "/buy/")
 
   }
 
