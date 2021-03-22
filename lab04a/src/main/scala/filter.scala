@@ -13,20 +13,21 @@ object filter {
     import spark.implicits._
 
     val topic = spark.conf.get("spark.filter.topic_name")
-    val offset = spark.conf.get("spark.filter.offset")
+    var offset = spark.conf.get("spark.filter.offset")
     val path = spark.conf.get("spark.filter.output_dir_prefix")
-    val topicOffset = if (offset == "earliest") "earliest" else s"""{"$topic":{"0":$offset}}"""
+//    val topicOffset = if (offset == "earliest") "earliest" else s"""{"$topic":{"0":$offset}}"""
 
-//    if (offset != "earliest") {
-//      offset = s"""{"${topic}":{"0":${offset}}}"""
-//    }
+
+    if (offset != "ealiest") {
+      offset = s"""{"$topic":{"0":$offset}}"""
+    }
 
     spark.conf.set("spark.sql.session.timeZone", "UTC")
     val df_initial = spark.read
       .format("kafka")
       .option("kafka.bootstrap.servers", "spark-master-1:6667")
       .option("subscribe", topic)
-      .option("startingOffsets", topicOffset)
+      .option("startingOffsets", offset)
       .option("endingOffsets", "latest")
       //.option("checkpointLocation", "s/tmp/chk/$chkName")
       .load()
@@ -44,7 +45,7 @@ object filter {
     val processedDF = df
       .withColumn("jsonData", from_json($"value", schema)).select("jsonData.*")
       .withColumn("date", date_format(($"timestamp" / 1000).cast(TimestampType), "YYYYMMDD"))
-      .withColumn("date_part", $"date")
+      .withColumn("date_part", df("date"))
 
     val ViewDF = processedDF.filter($"event_type" === "view")
     val BuyDF = processedDF.filter($"event_type" === "buy")
