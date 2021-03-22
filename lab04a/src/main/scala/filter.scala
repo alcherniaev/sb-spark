@@ -29,7 +29,7 @@ object filter {
       .option("kafka.bootstrap.servers", "spark-master-1:6667")
       .option("subscribe", topic_name)
       .option("startingOffsets", offset)
-      .option("endingOffsets", "latest")
+      //.option("endingOffsets", "latest")
       //.option("checkpointLocation", "s/tmp/chk/$chkName")
       .load()
 
