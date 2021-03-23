@@ -7,7 +7,7 @@ import org.apache.spark.sql.streaming.Trigger
 object agg {
   def main(args: Array[String]) = {
     val spark = SparkSession
-      .builder()
+      .builder
       .appName("lab04b")
       .getOrCreate()
 
@@ -19,7 +19,7 @@ object agg {
       .option("subscribe", "alexey_chernyaev2")
       .load()
 
-    val df = initialDF.select($"value".cast("string"))
+    val df = initialDF.select($"value".cast("string").as[String])
 
     val schema = StructType(Seq(
       StructField("category", StringType, true),
@@ -34,7 +34,7 @@ object agg {
                         .withColumn("date", ($"timestamp" / 1000).cast(TimestampType))
 
     val dfW = processedDF.groupBy(window(col("date"), "1 hours")).agg(
-      sum(when($"event_type" === "buy", $"item_price")).otherwise(0).alias("revenue"),
+      sum(when($"event_type" === "buy", col("item_price"))).otherwise(0).alias("revenue"),
       sum(when($"uid".isNotNull, 1).otherwise(0)).alias("visitors"),
       sum(when($"event_type" === "buy", 1).otherwise(0)).alias("purchases"))
       .withColumn("aov", $"revenue" / $"purchases")
@@ -43,7 +43,6 @@ object agg {
 
     val query = dfW
       .select($"start_ts".cast("string").alias("key"), to_json(struct("*")).alias("value"))
-      .select("value")
       .writeStream
       .trigger(Trigger.ProcessingTime("5 seconds"))
       .format("kafka")
