@@ -34,7 +34,7 @@ object agg {
                         .withColumn("date", ($"timestamp" / 1000).cast(TimestampType))
 
     val dfW = processedDF.groupBy(window(col("date"), "1 hours")).agg(
-      sum(when($"event_type" === "buy", col("item_price"))).otherwise(0).alias("revenue"),
+      sum(when($"event_type" === "buy", col("item_price")).otherwise(0)).alias("revenue"),
       sum(when($"uid".isNotNull, 1).otherwise(0)).alias("visitors"),
       sum(when($"event_type" === "buy", 1).otherwise(0)).alias("purchases"))
       .withColumn("aov", $"revenue" / $"purchases")
