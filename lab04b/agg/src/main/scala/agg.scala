@@ -43,6 +43,7 @@ object agg {
 
     val query = dfW
       .select($"start_ts".cast("string").alias("key"), to_json(struct("*")).alias("value"))
+      .select("value")
       .writeStream
       .trigger(Trigger.ProcessingTime("5 seconds"))
       .format("kafka")
