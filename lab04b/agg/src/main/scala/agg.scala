@@ -39,9 +39,9 @@ object agg {
       sum(when($"event_type" === "buy", 1).otherwise(0)).alias("purchases"))
       .withColumn("aov", $"revenue" / $"purchases")
       .withColumn("start_ts", $"window.start".cast("long"))
-      .withColumn("end_ts", $"window.end".cast("long"))
+      .withColumn("end_ts", $"window.end".cast("long")).drop(col("window"))
 
-    val query = dfW
+    dfW
       .select($"start_ts".cast("string").alias("key"), to_json(struct("*")).alias("value"))
       .writeStream
       .trigger(Trigger.ProcessingTime("5 seconds"))
@@ -53,7 +53,7 @@ object agg {
       .outputMode("update")
       .start()
 
-    query.awaitTermination()
+
 
   }
 }
