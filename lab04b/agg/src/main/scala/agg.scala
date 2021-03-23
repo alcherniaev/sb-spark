@@ -5,7 +5,7 @@ import org.apache.spark.sql.streaming.Trigger
 
 
 object agg {
-  def main(args: Array[String] = {
+  def main(args: Array[String]) = {
     val spark = SparkSession
       .builder()
       .appName("lab04b")
