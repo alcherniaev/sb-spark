@@ -59,7 +59,7 @@ object agg {
       .format("kafka")
       .option("kafka.bootstrap.servers", "spark-master-1:6667")
       .option("topic", "alexey_chernyaev2_lab04b_out")
-      .option("checkpointLocation", "checkpoint_alexey_chernyaev2_4b")
+      .option("checkpointLocation", "lab04b_checkpoint_alexey_chernyaev2")
       .outputMode("update")
       .start()
 
