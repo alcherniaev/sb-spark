@@ -41,16 +41,32 @@ object agg {
       .withColumn("start_ts", $"window.start".cast("long"))
       .withColumn("end_ts", $"window.end".cast("long")).drop(col("window"))
 
-    dfW
-      .select($"start_ts".cast("string").alias("key"), to_json(struct("*")).alias("value"))
+//    dfW
+//      .select($"start_ts".cast("string").alias("key"), to_json(struct("*")).alias("value"))
+//      .writeStream
+//      .format("kafka")
+//      .option("kafka.bootstrap.servers", "spark-master-1:6667")
+///      .option("topic", "alexey_chernyaev2_lab04b_out")
+//      .option("checkpointLocation", "/user/alexey.chernyaev2/lab04b_checkpoint")
+//      .outputMode("update")
+//      .trigger(Trigger.ProcessingTime("5 seconds"))
+//      .start()
+
+
+    val query = dfW
+      .selectExpr("CAST(start_ts AS STRING) AS key", "to_json(struct(*)) AS value")
       .writeStream
+      .trigger(Trigger.ProcessingTime("5 seconds"))
       .format("kafka")
+      .option("checkpointLocation", "/user/alexey.chernyaev2/lab04b_checkpoint")
       .option("kafka.bootstrap.servers", "spark-master-1:6667")
       .option("topic", "alexey_chernyaev2_lab04b_out")
-      .option("checkpointLocation", "/user/alexey.chernyaev2/lab04b_checkpoint")
+      .option("maxOffsetsPerTrigger", 200)
       .outputMode("update")
-      .trigger(Trigger.ProcessingTime("5 seconds"))
       .start()
+
+
+    query.awaitTermination()
 
   }
 }
