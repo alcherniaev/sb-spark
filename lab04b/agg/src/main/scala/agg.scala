@@ -41,6 +41,20 @@ object agg {
       .withColumn("start_ts", $"window.start".cast("long"))
       .withColumn("end_ts", $"window.end".cast("long")).drop(col("window"))
 
+    val query = df
+      .selectExpr("CAST(start_ts AS STRING) AS key", "to_json(struct(*)) AS value")
+      .writeStream
+      .trigger(Trigger.ProcessingTime("5 seconds"))
+      .format("kafka")
+      .option("checkpointLocation", "alexey_chernyaev2_lab04b_out")
+      .option("kafka.bootstrap.servers", "spark-master-1:6667")
+      .option("topic", "lab04b_checkpoint_alexey_chernyaev2")
+      .option("maxOffsetsPerTrigger", 200)
+      .outputMode("update")
+      .start()
+
+
+    query.awaitTermination()
 //    dfW
 //      .select($"start_ts".cast("string").alias("key"), to_json(struct("*")).alias("value"))
 //      .writeStream
@@ -53,15 +67,15 @@ object agg {
 //      .start()
 
 
-    dfW
-      .selectExpr("CAST(start_ts AS STRING) AS key", "to_json(struct(*)) AS value")
-      .writeStream
-      .format("kafka")
-      .option("kafka.bootstrap.servers", "spark-master-1:6667")
-      .option("topic", "alexey_chernyaev2_lab04b_out")
-      .option("checkpointLocation", "lab04b_checkpoint_alexey_chernyaev2")
-      .outputMode("update")
-      .start()
+//    dfW
+//      .selectExpr("CAST(start_ts AS STRING) AS key", "to_json(struct(*)) AS value")
+//     .writeStream
+//      .format("kafka")
+//      .option("kafka.bootstrap.servers", "spark-master-1:6667")
+//      .option("topic", "alexey_chernyaev2_lab04b_out")
+//      .option("checkpointLocation", "lab04b_checkpoint_alexey_chernyaev2")
+//      .outputMode("update")
+//      .start()
 
 
   }
