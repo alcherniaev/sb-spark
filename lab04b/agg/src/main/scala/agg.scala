@@ -1,6 +1,6 @@
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{LongType, StringType, StructField, StructType, TimestampType}
-import org.apache.spark.sql.functions.{col, from_json, struct, sum, to_json, when, window}
+import org.apache.spark.sql.functions.{col, from_json, lit, struct, sum, to_json, when, window}
 import org.apache.spark.sql.streaming.Trigger
 
 
@@ -40,7 +40,7 @@ object agg {
       .withColumn("aov", $"revenue" / $"purchases")
       .withColumn("start_ts", $"window.start".cast("long"))
       .withColumn("end_ts", $"window.end".cast("long")).drop(col("window"))
-
+      .selectExpr("CAST(start_ts AS STRING) AS key", "to_json(struct(*)) AS value")
 //    dfW
 //      .select($"start_ts".cast("string").alias("key"), to_json(struct("*")).alias("value"))
 //      .writeStream
@@ -53,20 +53,13 @@ object agg {
 //      .start()
 
 
-    val query = dfW
-      .selectExpr("CAST(start_ts AS STRING) AS key", "to_json(struct(*)) AS value")
-      .writeStream
-      .trigger(Trigger.ProcessingTime("5 seconds"))
+    dfW.withColumn("topic", lit("alexey_chernyaev2_lab04b_out"))
+      .write
       .format("kafka")
-      .option("checkpointLocation", "/user/alexey.chernyaev2/lab04b_checkpoint")
       .option("kafka.bootstrap.servers", "spark-master-1:6667")
-      .option("topic", "alexey_chernyaev2_lab04b_out")
-      .option("maxOffsetsPerTrigger", 200)
-      .outputMode("update")
-      .start()
 
+      .save
 
-    query.awaitTermination()
 
   }
 }
