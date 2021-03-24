@@ -41,7 +41,7 @@ object agg {
       .withColumn("start_ts", $"window.start".cast("long"))
       .withColumn("end_ts", $"window.end".cast("long")).drop(col("window"))
 
-    val query = df
+    val query = dfW
       .selectExpr("CAST(start_ts AS STRING) AS key", "to_json(struct(*)) AS value")
       .writeStream
       .trigger(Trigger.ProcessingTime("5 seconds"))
