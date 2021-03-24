@@ -53,11 +53,11 @@ object agg {
 //      .start()
 
 
-    dfW.withColumn("topic", lit("alexey_chernyaev2_lab04b_out"))
+    dfW
       .write
       .format("kafka")
       .option("kafka.bootstrap.servers", "spark-master-1:6667")
-
+      .option("topic", "alexey_chernyaev2_lab04b_out")
       .save
 
 
