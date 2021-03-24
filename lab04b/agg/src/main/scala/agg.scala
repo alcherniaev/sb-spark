@@ -46,9 +46,9 @@ object agg {
       .writeStream
       .trigger(Trigger.ProcessingTime("5 seconds"))
       .format("kafka")
-      .option("checkpointLocation", "alexey_chernyaev2_lab04b_out")
+      .option("checkpointLocation", "lab04b_checkpoint_alexey_chernyaev2")
       .option("kafka.bootstrap.servers", "spark-master-1:6667")
-      .option("topic", "lab04b_checkpoint_alexey_chernyaev2")
+      .option("topic", "alexey_chernyaev2_lab04b_out")
       .option("maxOffsetsPerTrigger", 200)
       .outputMode("update")
       .start()
