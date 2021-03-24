@@ -40,7 +40,7 @@ object agg {
       .withColumn("aov", $"revenue" / $"purchases")
       .withColumn("start_ts", $"window.start".cast("long"))
       .withColumn("end_ts", $"window.end".cast("long")).drop(col("window"))
-      .selectExpr("CAST(start_ts AS STRING) AS key", "to_json(struct(*)) AS value")
+
 //    dfW
 //      .select($"start_ts".cast("string").alias("key"), to_json(struct("*")).alias("value"))
 //      .writeStream
@@ -54,11 +54,12 @@ object agg {
 
 
     dfW
-      .write
+      .selectExpr("CAST(start_ts AS STRING) AS key", "to_json(struct(*)) AS value")
+      .writeStream
       .format("kafka")
       .option("kafka.bootstrap.servers", "spark-master-1:6667")
       .option("topic", "alexey_chernyaev2_lab04b_out")
-      .save
+      .start()
 
 
   }
