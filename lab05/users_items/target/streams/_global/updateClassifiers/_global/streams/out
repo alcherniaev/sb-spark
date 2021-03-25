@@ -1,0 +1,4 @@
+[debug] "not up to date. inChanged = true, force = false
+[debug] Updating ProjectRef(uri("file:/Users/cernaevaa/Downloads/sberbank-spark-de-1-master/solutions/svetlana.akselrod/lab05/users_items/"), "users_items")...
+[debug] Done updating ProjectRef(uri("file:/Users/cernaevaa/Downloads/sberbank-spark-de-1-master/solutions/svetlana.akselrod/lab05/users_items/"), "users_items")
+[warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
