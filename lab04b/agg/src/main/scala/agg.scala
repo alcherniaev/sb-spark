@@ -33,7 +33,7 @@ object agg {
     val processedDF = df.withColumn("jsonData", from_json(col("value"), schema)).select("jsonData.*")
                         .withColumn("date", ($"timestamp" / 1000).cast(TimestampType))
 
-    val dfW = processedDF.groupBy(window(col("date"), "1 hours")).agg(
+    val dfW = processedDF.groupBy(window(col("date"), "1 hour")).agg(
       sum(when($"event_type" === "buy", col("item_price")).otherwise(0)).alias("revenue"),
       sum(when($"uid".isNotNull, 1).otherwise(0)).alias("visitors"),
       sum(when($"event_type" === "buy", 1).otherwise(0)).alias("purchases"))
@@ -49,12 +49,19 @@ object agg {
       .option("checkpointLocation", "lab04b_checkpoint_alexey_chernyaev2")
       .option("kafka.bootstrap.servers", "spark-master-1:6667")
       .option("topic", "alexey_chernyaev2_lab04b_out")
+
       .option("maxOffsetsPerTrigger", 200)
       .outputMode("update")
       .start()
 
-
     query.awaitTermination()
+
+//    dfW.writeStream
+//      .format("kafka")
+//      .option("kafka.bootstrap.servers", "host1:port1,host2:port2")
+//      .option("topic", "updates")
+//      .start()
+
 //    dfW
 //      .select($"start_ts".cast("string").alias("key"), to_json(struct("*")).alias("value"))
 //      .writeStream
@@ -76,7 +83,6 @@ object agg {
 //      .option("checkpointLocation", "lab04b_checkpoint_alexey_chernyaev2")
 //      .outputMode("update")
 //      .start()
-
 
   }
 }
