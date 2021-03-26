@@ -18,7 +18,7 @@ object users_items extends App {
   val dfBuy = spark.read.json(input_dir + "/buy")
   val dfVisit = dfView.union(dfBuy)
 
-  val maxDate = dfVisit.agg(max("date")).as[String].collect
+  val maxDate = dfVisit.agg(max(date_format(from_unixtime($"timestamp" / 1000), "yyyyMMdd"))).as[String].collect
   val outputPath = output_dir + "/" + maxDate(0)
 
   val matrix = dfVisit
