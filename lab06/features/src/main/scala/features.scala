@@ -4,7 +4,7 @@ import org.apache.spark.sql.expressions.Window
 import org.apache.spark.ml.feature.CountVectorizerModel
 
 object features extends App {
-  val spark = SparkSession.builder().appName("filter").getOrCreate()
+  val spark = SparkSession.builder().appName("features").getOrCreate()
   spark.conf.set("spark.sql.session.timeZone", "UTC")
 
   import spark.implicits._
