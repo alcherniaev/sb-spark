@@ -25,6 +25,7 @@ object test extends App {
     .format("kafka")
     .option("kafka.bootstrap.servers", "spark-master-1:6667")
     .option("subscribe", input_topic_name)
+    .option("failOnDataLoss", "false")
     .load
 
   val testing = sdf
