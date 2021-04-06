@@ -50,6 +50,7 @@ object test extends App {
       .option("checkpointLocation", "chk/alexey_chernyaev2")
       .option("kafka.bootstrap.servers", "spark-master-1:6667")
       .option("topic", output_topic_name)
+      .option("failOnDataLoss", "false")
       .trigger(Trigger.ProcessingTime("5 seconds"))
   }
 }
