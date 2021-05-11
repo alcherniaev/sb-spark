@@ -1,1 +1,1 @@
-# this code from NewProLab labs  
+# this code from NewProLab labs (Spark, Scala, Kafka, NoSQL)
